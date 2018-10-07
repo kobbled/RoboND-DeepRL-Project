@@ -269,7 +269,7 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 		}
 
 		if (collisionCheck){
-			rewardHistory = REWARD_LOSS * distGoal;
+			rewardHistory = REWARD_WIN * distGoal;
 
 			newReward  = true;
 			endEpisode = true;
@@ -556,7 +556,11 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 	if( maxEpisodeLength > 0 && episodeFrames > maxEpisodeLength )
 	{
 		printf("ArmPlugin - triggering EOE, episode has exceeded %i frames\n", maxEpisodeLength);
-		rewardHistory = REWARD_LOSS;
+		if(distGoal < 0.3){
+			rewardHistory = REWARD_LOSS * distGoal;
+		} else {
+			rewardHistory = REWARD_LOSS;
+		}
 		newReward     = true;
 		endEpisode    = true;
 	}
@@ -596,7 +600,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 						
 			if(DEBUG){printf("GROUND CONTACT, EOE\n");}
 
-			rewardHistory = REWARD_LOSS * distGoal;
+			rewardHistory = REWARD_LOSS;
 			newReward     = true;
 			endEpisode    = true;
 		}
@@ -642,6 +646,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 			endEpisode       = false;
 			episodeFrames    = 0;
 			lastGoalDistance = 0.0f;
+			distGoal         = 0.0f;
 			avgGoalDelta     = 0.0f;
 
 			// track the number of wins and agent accuracy
