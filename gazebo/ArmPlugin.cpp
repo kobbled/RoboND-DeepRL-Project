@@ -254,11 +254,11 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 	
 		// TODO - Check if there is collision between the arm and object, then issue learning reward
 		const bool collisionCheck = (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) == 0);
-
-#if GRIPPERCOLLISION
 		const bool collision2Check = (strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0);
 
-		if (collisionCheck && collision2Check)
+#if GRIPPERCOLLISION
+
+		if (collision2Check)
 		{
 			rewardHistory = REWARD_WIN;
 
