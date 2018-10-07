@@ -1,8 +1,16 @@
-1:
+task1-attempt1:
 
 changed from Adam to RMSprop
 increased replay memory to 20000
 changed reward win and loss from 100/-50 to 1000/-100
-changed learning rate from 0.01 to 0.1
+changed learning rate from 0.01 to 0.1 -> learning rate was too low for maximum of 100 frames per episode. Increasing number of frames might help with this.
 
 negative reward on ground contact is proportional to distance from goal 
+
+task1-attempt2:
+
+changes worked. was able to achieve a >90% success rate in less than 20 episodes.
+
+task20attempt1:
+
+has a harder time accomplishing task2. was unable to win an episode until episode 15, and took over 300 runs to get an accuracy of 80%
