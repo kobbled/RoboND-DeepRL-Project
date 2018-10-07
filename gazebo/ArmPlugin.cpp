@@ -162,8 +162,6 @@ bool ArmPlugin::createAgent()
                             OPTIMIZER, LEARNING_RATE, REPLAY_MEMORY, BATCH_SIZE,
                             GAMMA, EPS_START, EPS_END, EPS_DECAY,
 							USE_LSTM, LSTM_SIZE, ALLOW_RANDOM, DEBUG);
-	
-	agent = NULL;
 
 	if( !agent )
 	{
@@ -579,7 +577,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		const float groundContact = 0.05f;
 		
 		// TODO - set appropriate Reward for robot hitting the ground.
-		const bool checkGroundContact = ( gripBBox.min.z <= groundContact || gripBBox.max.z <= groundContact );
+		bool checkGroundContact = ( gripBBox.min.z <= groundContact || gripBBox.max.z <= groundContact );
 		
 		
 		if(checkGroundContact)
@@ -608,7 +606,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 				const float distDelta  = lastGoalDistance - distGoal;
 
 				// compute the smoothed moving average of the delta of the distance to the goal
-				avgGoalDelta  = (avgGoalDelta * ALPHA) + (distDelta * (1 - ALPHA));
+				avgGoalDelta  = (avgGoalDelta * ALPHA) + (distDelta * (1.0f - ALPHA));
 				rewardHistory = avgGoalDelta;
 				newReward     = true;	
 			}
