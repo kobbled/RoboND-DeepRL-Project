@@ -68,7 +68,7 @@
 #define LOCKBASE true
 
 //turn to true to issue reward based on collision between arm's gripper base and the object
-#define GRIPPERCOLLISION false
+#define GRIPPERCOLLISION true
 
 
 namespace gazebo
