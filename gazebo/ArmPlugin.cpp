@@ -113,6 +113,7 @@ ArmPlugin::ArmPlugin() : ModelPlugin(), cameraNode(new gazebo::transport::Node()
 	testAnimation    = true;
 	loopAnimation    = false;
 	animationStep    = 0;
+	distGoal         = 0.0f;
 	lastGoalDistance = 0.0f;
 	avgGoalDelta     = 0.0f;
 	successfulGrabs = 0;
@@ -265,6 +266,15 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 			newReward  = true;
 			endEpisode = true;
 			return;
+		}
+
+		if (collisionCheck){
+			rewardHistory = REWARD_LOSS * distGoal;
+
+			newReward  = true;
+			endEpisode = true;
+			return;
+
 		}
 #else
 		if (collisionCheck){
@@ -578,7 +588,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		
 		// TODO - set appropriate Reward for robot hitting the ground.
 		bool checkGroundContact = ( gripBBox.min.z <= groundContact || gripBBox.max.z <= groundContact );
-		const float distGoal = BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
+		distGoal = BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
 		
 		
 		if(checkGroundContact)

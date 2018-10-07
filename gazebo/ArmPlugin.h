@@ -83,6 +83,7 @@ private:
 	uint32_t animationStep;
 	float    resetPos[DOF];
 	float    lastGoalDistance;
+	float 	 distGoal;
 	float    avgGoalDelta;
 	int	    successfulGrabs;
 	int	    totalRuns;
