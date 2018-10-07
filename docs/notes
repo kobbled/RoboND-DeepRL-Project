@@ -1,0 +1,8 @@
+1:
+
+changed from Adam to RMSprop
+increased replay memory to 20000
+changed reward win and loss from 100/-50 to 1000/-100
+changed learning rate from 0.01 to 0.1
+
+negative reward on ground contact is proportional to distance from goal 
