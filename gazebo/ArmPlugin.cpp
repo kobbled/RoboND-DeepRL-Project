@@ -578,6 +578,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		
 		// TODO - set appropriate Reward for robot hitting the ground.
 		bool checkGroundContact = ( gripBBox.min.z <= groundContact || gripBBox.max.z <= groundContact );
+		const float distGoal = BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
 		
 		
 		if(checkGroundContact)
@@ -585,7 +586,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 						
 			if(DEBUG){printf("GROUND CONTACT, EOE\n");}
 
-			rewardHistory = REWARD_LOSS;
+			rewardHistory = REWARD_LOSS * distGoal;
 			newReward     = true;
 			endEpisode    = true;
 		}
@@ -596,7 +597,6 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		
 		if(!checkGroundContact)
 		{
-			const float distGoal = BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
 
 			if(DEBUG){printf("distance('%s', '%s') = %f\n", gripper->GetName().c_str(), prop->model->GetName().c_str(), distGoal);}
 
