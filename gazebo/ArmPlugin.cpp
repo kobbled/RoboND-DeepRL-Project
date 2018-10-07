@@ -69,6 +69,9 @@
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
 
+//turn to true to issue reward based on collision between arm's gripper base and the object
+#define GRIPPERCOLLISION false
+
 
 namespace gazebo
 {
@@ -255,6 +258,8 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 	
 		// TODO - Check if there is collision between the arm and object, then issue learning reward
 		const bool collisionCheck = (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) == 0);
+
+#if GRIPPERCOLLISION
 		const bool collision2Check = (strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0);
 
 		if (collisionCheck && collision2Check)
@@ -265,6 +270,7 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 			endEpisode = true;
 			return;
 		}
+#else
 		if (collisionCheck){
 			rewardHistory = REWARD_WIN;
 
@@ -272,7 +278,9 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 			endEpisode = true;
 			return;
 
-		} else{
+		}
+#endif 
+		else{
 			rewardHistory = REWARD_LOSS;
 			newReward = true;
 			endEpisode = true;
