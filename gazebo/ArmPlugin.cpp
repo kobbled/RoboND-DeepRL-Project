@@ -34,7 +34,7 @@
 
 #define INPUT_WIDTH   64
 #define INPUT_HEIGHT  64
-#define OPTIMIZER "adam"
+#define OPTIMIZER "Adam"
 #define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 64
