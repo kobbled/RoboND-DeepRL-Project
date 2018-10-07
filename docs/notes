@@ -11,6 +11,18 @@ task1-attempt2:
 
 changes worked. was able to achieve a >90% success rate in less than 20 episodes.
 
-task20attempt1:
+task2-attempt1:
 
-has a harder time accomplishing task2. was unable to win an episode until episode 15, and took over 300 runs to get an accuracy of 80%
+has a harder time accomplishing task2. was unable to win an episode until episode 15, and took over 600 runs to get an accuracy of 80%
+
+task2-attempt2:
+
+making the loss reward proportional to the distance the gripper is from the part after it has exceed the set amount of time steps, seems to not help with training compared to just setting the reward to the max win and max loss values. The robot just tries to hover over the part, as it is minimizing its loss. 
+
+Setting contact with the arm to a max loss also does not help training as this kind of negative reinforcement is counter intuative.
+
+setting a proportional loss to gripper distance only when the gripper is closer than a certain threshold, as well as a proportional win reward if it touches the robot arm, had the robot completing the task within 5 runs. With the proportional win reward the robot touched the arm to the part on multiple occasions when the gripper distance was essentially zero, drastically helping out the reward system, as only minore changes had to be made to recieve a maximum reward. However these reward functions caused the RL agent to only begin to consistently reach its goal after 140 episodes, and an 80% success rate after 350 episodes.
+
+
+
+improvements could be made to the interm reward to reach the optimum policy in fewer time steps.   
