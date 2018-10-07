@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "functional": "cpp",
+        "__functional_base": "cpp",
+        "__locale": "cpp"
+    }
+}
