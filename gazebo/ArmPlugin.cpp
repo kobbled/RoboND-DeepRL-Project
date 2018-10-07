@@ -41,10 +41,8 @@
 #define USE_LSTM true
 #define LSTM_SIZE 256
 
-/*
-/ TODO - Define Reward Parameters
-/
-*/
+// TODO - Define Reward Parameters
+
 
 #define REWARD_WIN  100.0f
 #define REWARD_LOSS -50.0f
@@ -135,7 +133,7 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	cameraNode->Init();
 	
 	// Subscribe to camera topic
-	cameraSub = cameraNode->Subscribe("/gazebo/arm_world/camera/link/camera/image", ArmPlugin::onCameraMsg, this);
+	cameraSub = cameraNode->Subscribe("/gazebo/arm_world/camera/link/camera/image", &ArmPlugin::onCameraMsg, this);
 
 	//cameraSub = None;
 
@@ -143,7 +141,7 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	collisionNode->Init();
 		
 	// TODO - Subscribe to prop collision topic
-	collisionSub = collisionNode->Subscribe("/gazebo/arm_world/tube/tube_link/my_contact", ArmPlugin::onCollisionMsg, this);
+	collisionSub = collisionNode->Subscribe("/gazebo/arm_world/tube/tube_link/my_contact", &ArmPlugin::onCollisionMsg, this);
 	
 	//collisionSub = None;
 
@@ -610,7 +608,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 				const float distDelta  = lastGoalDistance - distGoal;
 
 				// compute the smoothed moving average of the delta of the distance to the goal
-				avgGoalDelta  = (average_delta * ALPHA) + (dist * (1 - ALPHA));
+				avgGoalDelta  = (avgGoalDelta * ALPHA) + (distDelta * (1 - ALPHA));
 				rewardHistory = avgGoalDelta;
 				newReward     = true;	
 			}
