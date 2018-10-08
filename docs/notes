@@ -1,7 +1,8 @@
 task1-attempt1:
 
 changed from Adam to RMSprop
-increased replay memory to 20000
+increased replay memory to 20000 experience tuples in order to recall more experiences in the replay buffer. Being able to increase the randomization of experience tuples to choose from can help break state action correlation and actions values from diverging or oscillating. 
+
 changed reward win and loss from 100/-50 to 1000/-100
 changed learning rate from 0.01 to 0.1 -> learning rate was too low for maximum of 100 frames per episode. Increasing number of frames might help with this.
 
@@ -19,10 +20,14 @@ task2-attempt2:
 
 making the loss reward proportional to the distance the gripper is from the part after it has exceed the set amount of time steps, seems to not help with training compared to just setting the reward to the max win and max loss values. The robot just tries to hover over the part, as it is minimizing its loss. 
 
-Setting contact with the arm to a max loss also does not help training as this kind of negative reinforcement is counter intuative.
+Setting contact with the arm to a max loss also does not help training as this kind of negative reinforcement is counter intuitive.
 
-setting a proportional loss to gripper distance only when the gripper is closer than a certain threshold, as well as a proportional win reward if it touches the robot arm, had the robot completing the task within 5 runs. With the proportional win reward the robot touched the arm to the part on multiple occasions when the gripper distance was essentially zero, drastically helping out the reward system, as only minore changes had to be made to recieve a maximum reward. However these reward functions caused the RL agent to only begin to consistently reach its goal after 140 episodes, and an 80% success rate after 350 episodes.
+setting a proportional loss to gripper distance only when the gripper is closer than a certain threshold, as well as a proportional win reward if it touches the robot arm, had the robot completing the task within 5 runs. With the proportional win reward the robot touched the arm to the part on multiple occasions when the gripper distance was essentially zero, drastically helping out the reward system, as only minor changes had to be made to receive a maximum reward. However these reward functions caused the RL agent to only begin to consistently reach its goal after 140 episodes, and an 80% success rate after 350 episodes.
 
 
 
 improvements could be made to the interm reward to reach the optimum policy in fewer time steps.   
+
+Explores state space effectively
+
+square image allows for more optimized neural network operations on GPUs 

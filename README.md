@@ -8,7 +8,7 @@ This project is based on the Nvidia open source project "jetson-reinforcement" d
 1. Have any part of the robot arm touch the object of interest, with at least a 90% accuracy.
     ![task 1](./docs/gifs/Deep_RL-task1.gif)
 2. Have only the gripper base of the robot arm touch the object, with at least a 80% accuracy.
-    ![task 1](./docs/gifs/Deep_RL-task2_attempt2.gif)
+    ![task 2](./docs/gifs/Deep_RL-task2_attempt2.gif)
 
 ## Building from Source (Nvidia Jetson TX2)
 

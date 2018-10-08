@@ -1,0 +1,60 @@
+\ifglsentryexists{word}{}%
+{%
+\gls@defglossaryentry{word}%
+{%
+name={Word},%
+sort={Word},%
+type={main},%
+first={Word},%
+firstplural={Words},%
+text={Word},%
+plural={Words},%
+description={What is this word about},%
+descriptionplural={What is this word about},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{sem}{}%
+{%
+\gls@defglossaryentry{sem}%
+{%
+name={SEM},%
+sort={SEM},%
+type={acronym},%
+first={Scanning Electron Microscope\glsspace (SEM)},%
+firstplural={Scanning Electron Microscopes\glsspace (SEMs)},%
+text={SEM},%
+plural={SEMs},%
+description={Scanning Electron Microscope},%
+descriptionplural={Scanning Electron Microscope\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Scanning Electron Microscope},%
+longplural={Scanning Electron Microscopes},%
+short={SEM},%
+shortplural={SEMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%

@@ -1,0 +1,156 @@
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{amsmath, amssymb}
+\usepackage{afterpage}
+%\usepackage{tikz}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{float} % for exact placement of figures
+\usepackage{verbatim} % for comment block
+\usepackage{ifthen}
+\usepackage{ifpdf}
+\usepackage{psfrag}
+
+\renewcommand{\figurename}{Fig.}
+\ifpdf
+%-->
+%--> Google.com search "hyperref options"
+%--> 
+%--> http://www.ai.mit.edu/lab/sysadmin/latex/documentation/latex/hyperref/manual.pdf
+%--> http://www.chemie.unibas.ch/~vogtp/LaTeX2PDFLaTeX.pdf 
+%--> http://www.uni-giessen.de/partosch/eurotex99/ oberdiek/print/sli4a4col.pdf
+%--> http://me.in-berlin.de/~miwie/tex-refs/html/latex-packages.html
+%-->
+    \usepackage[ pdftex, plainpages = false, pdfpagelabels, 
+                 pdfpagelayout = OneColumn, % display single page, advancing flips the page - Sasa Tomic
+                 bookmarks = true,
+                 bookmarksopen = true,
+                 bookmarksnumbered = true,
+                 breaklinks = true,
+                 linktocpage,
+                 colorlinks = true,
+                 linkcolor = blue,
+                 urlcolor  = blue,
+                 citecolor = blue,
+                 anchorcolor = green,
+                 hyperindex = true,
+                 hyperfigures
+                 ]{hyperref} 
+    %\usepackage[pdftex]{graphicx}
+    \DeclareGraphicsExtensions{.png, .jpg, .pdf}
+
+    \pdfcompresslevel=9
+    \graphicspath{{Figures/PNG/}{Figures/PDF/}{Figures/}}
+\else
+    \usepackage[ dvips, 
+                 bookmarks = true,
+                 bookmarksopen = true,
+                 bookmarksnumbered = true,
+                 breaklinks = true,
+                 linktocpage,
+                 colorlinks = true,
+                 linkcolor = blue,
+                 urlcolor  = blue,
+                 citecolor = blue,
+                 anchorcolor = green,
+                 hyperindex = true,
+                 hyperfigures
+                 ]{hyperref}
+
+    \usepackage{epsfig}
+    %\usepackage{graphicx}
+    \DeclareGraphicsExtensions{.eps, .ps}
+    \graphicspath{{Figures/EPS/}{Figures/}}
+\fi
+
+% glossary
+
+% Nomenclature
+\usepackage{nomencl}
+\makenomenclature
+\renewcommand\nomgroup[1]{%
+  \ifthenelse{\equal{#1}{A}}{%
+   \item[\textbf{Roman Symbols}] }{%             A - Roman
+    \ifthenelse{\equal{#1}{G}}{%
+     \item[\textbf{Greek Symbols}]}{%             G - Greek
+      \ifthenelse{\equal{#1}{R}}{%
+        \item[\textbf{Superscripts}]}{%              R - Superscripts
+          \ifthenelse{\equal{#1}{S}}{%
+           \item[\textbf{Subscripts}]}{{%             S - Subscripts
+	    \ifthenelse{\equal{#1}{X}}{%
+	     \item[\textbf{Other Symbols}]}{{%    X - Other Symbols
+	    \ifthenelse{\equal{#1}{Z}}{%
+	     \item[\textbf{Acronyms}]}%              Z - Acronyms
+              			{{}}}}}}}}}}
+
+% ====================================================
+% \Autoref is for the beginning of the sentence
+\let\orgautoref\autoref
+\providecommand{\Autoref}[1]{\def\equationautorefname{Equation}
+\def\sectionautorefname{Section}
+\def\figureautorefname{Figure}\def\subfigureautorefname{Figure}\orgautoref{#1}}
+% \autoref is used inside the sentence to produce Fig., and Eq. for figures, subfigures, and equations
+\renewcommand{\autoref}[1]{\def\equationautorefname{Eq.}
+\def\sectionautorefname{Section}
+\def\figureautorefname{Fig.}\def\subfigureautorefname{Fig.}\orgautoref{#1}}
+% ====================================================
+\usepackage[indention=10pt,singlelinecheck=false]{subfig}
+
+\setlength{\belowcaptionskip}{4pt}
+
+%%%%%%%%%%%%%%%% New Commands  %%%%%%%%%%%%%%%%%
+\usepackage{textgreek} % can use greek letters outside of math mode through eg. \textalpha, \textgamma
+% C
+\newcommand{\celcius}{\ensuremath{\rm ^{\circ} C}}
+% um
+\newcommand{\um}{\ensuremath{\rm \mu{}m}}
+% et al.
+\newcommand{\etal}{\itshape{ et al.}\normalfont{}}
+% carbides
+\def\mc#1#2{$\rm M_{#1}C_{#2}$}
+
+%   DIFFERENTIAL EXPRESSIONS
+%   1st and 2nd derivatives
+    \def\td#1#2{\frac{d#1}{d#2}}
+    \def\tdsec#1#2{\frac{d^2#1}{d #2^2}}
+    \def\pd#1#2{\frac{\partial #1}{\partial #2}}
+    \def\pdsec#1#2{\frac{\partial^2 #1}{\partial #2^2}}
+%   dimensionless 1st and 2nd derivatives
+    \def\dltd#1#2{\frac{d#1^*}{d#2^*}}
+    \def\dltdsec#1#2{\frac{d^2#1^*}{d {#2^*}^2}}
+    \def\dlpd#1#2{\frac{\partial #1^*}{\partial #2^*}}
+    \def\dlpdsec#1#2{\frac{\partial^2 #1^*}{\partial {#2^*}^2}}
+%   normalized 1st and 2nd derivatives
+    \def\ntd#1#2{\left(\frac{d#1}{d#2}\right)^*}
+    \def\ntdsec#1#2{\left(\frac{d^2#1}{d {#2}^2}\right)^*}
+    \def\npd#1#2{\left(\frac{\partial #1}{\partial #2}\right)^*}
+    \def\npdsec#1#2{\left(\frac{\partial^2 #1}{\partial {#2}^2}\right)^*}
+%   line 1st and 2nd derivatives
+    \def\ltd#1#2{{d#1}/{d#2}}
+    \def\ltdsec#1#2{{d^2#1}/{d #2^2}}
+    \def\lpd#1#2{{\partial #1}/{\partial #2}}
+    \def\lpdsec#1#2{{\partial^2 #1}/{\partial #2^2}}
+%   line, dimensionless 1st and 2nd derivatives
+    \def\ldltd#1#2{{d#1^*}/{d#2^*}}
+    \def\ldltdsec#1#2{{d^2#1^*}/{d {#2^*}^2}}
+    \def\ldlpd#1#2{{\partial #1^*}/{\partial #2^*}}
+    \def\ldlpdsec#1#2{{\partial^2 #1^*}/{\partial {#2^*}^2}}
+%   line, normalized 1st and 2nd derivatives
+    \def\lntd#1#2{\left({d#1}/{d#2}\right)^*}
+    \def\lntdsec#1#2{\left({d^2#1}/{d {#2}^2}\right)^*}
+    \def\lnpd#1#2{\left({\partial #1}/{\partial #2}\right)^*}
+    \def\lnpdsec#1#2{\left({\partial^2 #1}/{\partial {#2}^2}\right)^*}
+%   SUBSCRIPTS
+    \def\m{_{min}}
+    \def\M{_{max}}
+%   scientific notation
+    \def\e#1{\;10^{#1}}
+%   dimensionless groups
+    \def\Pe{\mbox{Pe}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
