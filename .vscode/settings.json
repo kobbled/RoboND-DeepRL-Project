@@ -3,5 +3,8 @@
         "functional": "cpp",
         "__functional_base": "cpp",
         "__locale": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "timestep"
+    ]
 }
